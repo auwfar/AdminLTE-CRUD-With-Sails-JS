@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AdminCRUD | <%=typeof title == 'undefined' ? 'Dashboard' : title%></title>
+    
+    <!-- meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- css --> 
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/lte/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lte/eksternal/font-awesome.min.css">
+    <link rel="stylesheet" href="/lte/eksternal/ionicons.min.css">
+    <link rel="stylesheet" href="/lte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/lte/dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="/lte/plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="/lte/plugins/iCheck/all.css">
+    <link rel="stylesheet" href="/lte/plugins/datatables/dataTables.bootstrap.css">
+
+    <!-- jQuery 2.2.3 -->
+    <script src="/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  </head>
+
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <!-- header -->
+      <header class="main-header">
+      <!-- Logo -->
+      <a href="/lte/" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><small>CRUD</small></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Admin</b>CRUD</span>
+      </a>
+
+      <!-- nav -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="/lte/#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a href="/lte/#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img src="/lte/img/<%=typeof req.session.data_login.admin_pict == 'profil.jpg' ? 'Admin' : req.session.data_login.admin_pict%>" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs"><%=typeof req.session.data_login.admin_name == 'undefined' ? 'Admin' : req.session.data_login.admin_name%></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+                  <img src="/lte/img/<%=typeof req.session.data_login.admin_pict == 'profil.jpg' ? 'Admin' : req.session.data_login.admin_pict%>" class="img-circle" alt="User Image">
+
+                  <p>
+                    <%=typeof req.session.data_login.admin_name == 'undefined' ? 'Admin' : req.session.data_login.admin_name%> - Web Developer
+                    <small>Member since Apr. 2017</small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="/profile" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        </nav>
+      </header>
+      
+      <!-- sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="/lte/img/<%=typeof req.session.data_login.admin_pict == 'profil.jpg' ? 'Admin' : req.session.data_login.admin_pict%>" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p><%=typeof req.session.data_login.admin_name == 'undefined' ? 'Admin' : req.session.data_login.admin_name%></p>
+              <!-- Status -->
+              <a href="/lte/#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">LIST MENU</li>
+            <!-- Optionally, you can add icons to the links -->
+
+            <li <%=page == 'dashboard' ? 'class="active"' : ''%>>
+              <a href="/dashboard">
+                <i class="fa fa-home"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            
+            <li <%=page == 'pegawai' ? 'class="active"' : ''%>>
+              <a href="/pegawai">
+                <i class="fa fa-user"></i>
+                <span>Data Pegawai</span>
+              </a>
+            </li>
+
+            <li <%=page == 'posisi' ? 'class="active"' : ''%>>
+              <a href="/posisi">
+                <i class="fa fa-briefcase"></i>
+                <span>Data Posisi</span>
+              </a>
+            </li>
+            
+            <li <%=page == 'kota' ? 'class="active"' : ''%>>
+              <a href="/kota">
+                <i class="fa fa-location-arrow"></i>
+                <span>Data Kota</span>
+              </a>
+            </li>
+          </ul>
+          <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+      
+      <!-- content -->
+      <div class="content-wrapper">
+        <!-- headerContent -->
+        <section class="content-header">
+          <h1>
+            <%=typeof title == 'undefined' ? 'Admin' : title%> Page
+            <small><%=typeof desc == 'undefined' ? '' : desc%></small>
+          </h1>
+        </section>
+        
+        <!-- Main content -->
+        <section class="content">
+          <%- body %>
+        </section>
+      </div>
+    
+      <!-- footer -->
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+          Dashboard Admin
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2017 <a href="#">Achmad Chadil Auwfar</a>.</strong> All rights reserved.
+      </footer>
+    
+      <div class="control-sidebar-bg"></div>
+    </div>
+
+    <!-- js -->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/lte/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/lte/plugins/select2/select2.full.min.js"></script>
+    <script src="/lte/plugins/iCheck/icheck.min.js"></script>
+    <script src="/lte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/lte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/lte/dist/js/app.min.js"></script>
+  </body>
+</html>

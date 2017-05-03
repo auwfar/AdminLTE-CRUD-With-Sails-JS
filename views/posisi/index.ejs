@@ -1,0 +1,86 @@
+<div class="box">
+  <div class="box-header">
+    <div class="col-md-6" style="padding: 0;">
+        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#modal-posisi-add"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
+    </div>
+    <div class="col-md-3">
+        <a href="/posisi/export" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
+    </div>
+    <div class="col-md-3">
+        <button class="form-control btn btn-default" data-toggle="modal" data-target="#import-posisi"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Import Data Excel</button>
+    </div>
+  </div>
+  <div class="box-body">
+    <table id="list-data" class="table table-bordered table-striped" width="100%">
+	    <thead>
+            <tr>
+                <th>No</th>
+                <th>Posisi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-posisi-add" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
+		  <div class="form-msg"></div>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <h3 style="display:block; text-align:center;">Tambah Data posisi</h3>
+
+		  <form id="form-posisi-add">
+		    <div class="input-group form-group">
+		      <span class="input-group-addon" id="sizing-addon2">
+		        <i class="glyphicon glyphicon-user"></i>
+		      </span>
+		      <input type="text" class="form-control" placeholder="Nama Posisi" name="posisi_name" aria-describedby="sizing-addon2">
+		    </div>
+		    <div class="form-group">
+		      <div class="col-md-12">
+		          <button type="submit" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Tambah Data</button>
+		      </div>
+		    </div>
+		  </form>
+		</div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#list-data').DataTable( {
+        ajax: {
+        	url: '/posisi/get',
+        	type: 'GET'
+        },
+        columns: [
+            { data: "number" },
+            { data: "posisi_name" },
+            { data: "act", className: "text-center" }
+        ]
+    });
+
+    socket.connect('/public/join');
+    io.socket.on('posisi_add', function (out) {
+    	if (out) {
+			$('#list-data').DataTable().ajax.reload();
+    	}
+	});
+  });
+
+  
+  $(document).on('submit', '#form-posisi-add', function(e) {
+  	e.preventDefault();
+
+    var data = JSON.stringify($(this).serializeArray());
+    data = JSON.parse(data);
+    io.socket.post('/posisi/add', data, function(out) {
+    	if (out) {
+			$('#modal-posisi-add').modal('hide');
+    	}
+    });
+  });
+</script>

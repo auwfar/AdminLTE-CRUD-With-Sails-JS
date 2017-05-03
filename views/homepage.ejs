@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=typeof title == 'undefined' ? 'Login - LatihOtak' : title%></title>
+    <link rel="stylesheet" href="/lo/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lo/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lo/css/mc.css">
+    <link rel="stylesheet" href="/lo/css/mj-md.css">
+    <style type="text/css">
+        a, a:hover, a:focus{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <section id="_login">
+        <!-- <div class="wrapper-logo-login"> -->
+            <div id="Login_LO" class="logo-login text-center">
+                <div class="form">
+                    <div class="row">
+                        <div class="w-t-form margin-normal">
+                            <div class="text-center">
+                                <label id="l1" href="#daftarLO" class="w-t-daftar" data-toggle="tab">Daftar</label>
+                                <label id="l2" href="#loginLO" class="w-t-daftar" data-toggle="tab">Login</label>
+                                <div  id="l3" ><label style="font-size: 2.6vmin;letter-spacing: 1px;">Atau</label></div>
+                            </div>
+                            <div class="tab-content">
+                            <div class="tab-pane fade in active" id="loginLO">
+                            <form name="login" id="login" novalidate="" class="form-login u-form " action="/login" method="post">
+                                <div class="row control-group" >
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label>Nama Pengguna</label>
+                                        <input type="text" name="username" class="form-control text-center" placeholder="Nama Pengguna" data-validation-required-message="Masukkan Username Anda" aria-invalid="false" maxlength="15" required>
+                                    </div>
+                                </div>
+                                <div class="row control-group">
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label>Kata Sandi</label>
+                                        <input type="password" name="password" class="form-control text-center" placeholder="Kata Sandi" data-validation-required-message="Masukkan Password Anda" aria-invalid="false" maxlength="15" required>
+                                    </div>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="row control-group text-center" style="font-size:2.8vmin;">
+                                    <input type="checkbox" id="remember"><label class="remember" for="remember"> Ingat saya</label>
+                                </div>
+                                <div id="success"></div>
+                                <div class="row" style="width: auto;">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn">Masuk</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                            <div class="tab-pane fade" id="daftarLO">
+                            <form name="daftar" id="login" novalidate="" class="form-login u-form " action="/register" method="post">
+                                <div class="row control-group" >
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label>Nama Pengguna</label>
+                                        <input type="text" name="username" class="form-control text-center" placeholder="Nama Pengguna" data-validation-required-message="Masukkan Username Anda" aria-invalid="false" maxlength="15" required>
+                                    </div>
+                                </div>
+                                <div class="row control-group">
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label>Kata Sandi</label>
+                                        <input type="password" name="password" class="form-control text-center" placeholder="Kata Sandi" data-validation-required-message="Masukkan Password Anda" aria-invalid="false" maxlength="15" required>
+                                    </div>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div id="success"></div>
+                                <div class="row" style="width: auto;">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn">Daftar</button>
+                                    </div>
+                                </div>
+                            </form> 
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img src="/lo/image/latiotak-logo-border.png" id="img1">
+                <div id="Logo_LO" class="logo-login text-center">
+                    <img src="/lo/image/latihotak-logo.png" id="img2">
+                </div>
+            </div>
+        <!-- </div> -->
+        <div id="w-t-form">
+            <div class="col-sm-12 col-xs-12">
+                <img src="/lo/image/latih-otak-m-logo.png"/>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row" style="margin-top:8px;">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                <label href="#daftarLO" class="w-t-daftar" data-toggle="tab" style="transform: rotate(0deg);">Daftar</label>
+                    
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                <label href="#daftarLO" class="w-t-daftar" data-toggle="tab" style="transform: rotate(0deg);">Login</label>                 
+                </div>
+            </div>
+            <div class="u-form">
+                <form name="login" id="login" novalidate="" class="form-login" action="http://localhost/GFour_Products/LatihOtak2/Halaman/Proses/Login.php" method="post">
+                    <div class="row control-group" >
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Nama Pengguna</label>
+                            <input type="text" name="username" class="form-control text-center" placeholder="Nama Pengguna" data-validation-required-message="Masukkan Username Anda" aria-invalid="false" maxlength="15" required>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Kata Sandi</label>
+                            <input type="password" name="password" class="form-control text-center" placeholder="Kata Sandi" data-validation-required-message="Masukkan Password Anda" aria-invalid="false" maxlength="15" required>
+                        </div>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="row control-group text-center" style="font-size:2.8vmin;">
+                        <input type="checkbox" id="remember"><label class="remember" for="remember"> Ingat saya</label>
+                    </div>
+                    <div id="success"></div>
+                    <div class="row" style="width: auto;">
+                        <div class="form-group">
+                            <button type="submit" class="btn">Masuk</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <header style="margin-top: 24px;">
+        <nav class="navbar shd">
+            <div class="row">
+                <a data-toggle="tab" href="#bd">
+                    <div class="col-md-3 col-sm-3 col-xs-12 menu">
+                        <span>Beranda</span>
+                    </div>
+                </a>
+                <a href="http://latihotak.com/Daftar">
+                    <div class="col-md-3 col-sm-3 col-xs-12 menu">
+                        <span>Daftar</span>
+                    </div>
+                </a>
+                <a data-toggle="tab" href="#cm">
+                    <div class="col-md-3 col-sm-3 col-xs-12 menu">
+                        <span>Cara Main</span>
+                    </div>
+                </a>
+                <div class="clearfix visible-xs-block"></div>
+                <a data-toggle="tab" href="#tk">
+                    <div class="col-md-3 col-sm-3 col-xs-12 menu">
+                        <span>Tentang Kami</span>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="tab-content">
+            <!-- Beranda / Info Event -->
+            <div id="bd" class="tab-pane fade in active">
+                <div class="container-fluid wrap-s-t">
+                    <div id="suraidaa" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#suraidaa" data-slide-to="0" class="active"></li>
+                            <li data-target="#suraidaa" data-slide-to="1"></li>
+                            <li data-target="#suraidaa" data-slide-to="2"></li>
+                            <li data-target="#suraidaa" data-slide-to="3"></li>
+                            <li data-target="#suraidaa" data-slide-to="4"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="fill" style="background-image:url('/lo/image/g4.png');">
+                                </div>
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="item">
+                                <div class="fill" style="background-image:url('/lo/image/my.png');"></div>
+                                <div class="overlay"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Cara Main -->
+            <div id="cm" class="tab-pane fade">
+                <div class="container-fluid wrap-t-t shd" onfocus="this">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure class="w-t-step">
+                                <span class="ic-step">
+                                    <text>1</text>
+                                </span>
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
+                            Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
+                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
+                            Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
+                            Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
+                            Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
+                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
+                            Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
+                            Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
+                        </div>
+                        <div class="col-md-6">
+                            <figure class="w-t-step">
+                                <span class="ic-step">
+                                    <text>2</text>
+                                </span>
+                            </figure>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure class="w-t-step">
+                                <span class="ic-step">
+                                    <text>3</text>
+                                </span>
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.
+                            Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
+                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.
+                            Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.
+                            Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tentang Kami -->
+            <div id="tk" class="tab-pane fade">
+                <div class="wrap-a-s shd" onfocus="this">
+                    <div class="lo-profil">
+                        <label>Latih Otak</label>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <h2>Team Kami</h2>
+                    <div class="lo-team">
+                        <img src="/lo/image/TMK.jpg" style="width:930px;height:325px;"/>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <br>
+    <!-- Iklan -->
+    <div class="row">
+        <div class="iklan">
+            <p>728 x 90</p>
+        </div>
+    </div>
+    <section id="quote" class="margin-top-10">
+        <div class="qu-ot">
+            <div class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner w-t-qu-ot" role="listbox">
+                    <div class="item active">
+                        <p>Admin Upah<br/>Kebijaksanaan bukanlah dilihat dari usia, tapi dilihat dari pengalaman dan pengetahuannya</p>
+                    </div>
+                    <div class="item">
+                        <p>Admin CrazzHole<br/>Satu-satunya kegagalan didunia ini adalah ketika kita berhenti untuk belajar</p>
+                    </div>
+                    <div class="item">
+                        <p>Admin Thogx<br/>Kualitas latihan anda menentukan kualitas prestasi anda</p>
+                    </div>
+                    <div class="item">
+                        <p><br/>Inilah LatihOtak.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row margin-top-20">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+            <ul class="social text-center">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="row w-t-foo">
+            <p class="col-md-12 col-sm-12 col-xs-12">GFour Indonesia &copy; <%=year%></p>
+        </div>
+    </footer>   
+    <script src="/lo/js/jquery.min.js"></script>
+    <script src="/lo/js/bootstrap.min.js"></script>
+    <script src="/lo/js/mj.js"></script>
+    <script src="/lo/js/mj-ef.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#w-t-form").hide();
+        $('#l2').click(function(event) {
+            $("#l2").addClass('success');
+            $("#l1").removeClass('success');
+            event.preventDefault();
+        });
+
+        $('#l1').click(function(event) {
+            $("#l1").addClass('success');
+            $("#l2").removeClass('success');
+            event.preventDefault();
+        });
+
+        $("#img2").show();
+        $("#img1").show();
+
+        $("input").focus(function(){
+            $("#img1").show();
+            $("#Logo_LO").hide();
+        });
+
+        $("input").focusout(function(){
+            $("#img1").show();
+            $("#Logo_LO").show();
+        });
+
+        $("#Login_LO").mouseenter(function(){
+          $("#img2").fadeOut(300);
+        });
+
+        $("#Login_LO").mouseleave(function(){
+          $("#img2").show();
+        });
+
+        if (screen.width < 481) {
+            $("#w-t-form").show();
+            $("#Login_LO").hide();
+            $("#Logo_LO").hide();
+            
+        } else {
+            $("#w-t-form").hide();
+            $("#Login_LO").show();
+            $("#Logo_LO").show();
+        }
+      });
+
+      $(document).on("submit", "#login", function(e){
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.post('/login', data, function(out) {
+          if(out.status) {
+            location.href = "/profile";
+          } else {
+            swal(out);
+          }
+        });
+      });
+    </script>
+</body>
+</html>
