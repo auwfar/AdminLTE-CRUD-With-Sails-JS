@@ -72,7 +72,11 @@ module.exports.routes = {
   'POST /posisi/add': {
     controller: "Posisi",
     action: "add"
-  }
+  },
+  '/posisi/detail/:posisi_id': {
+    controller: "Posisi",
+    action: "detail"
+  },
 
   /***************************************************************************
   *                                                                          *

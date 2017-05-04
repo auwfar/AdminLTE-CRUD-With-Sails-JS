@@ -35,18 +35,12 @@ module.exports = {
 		}
 	},
 	add: function(req, res) {
-		if (!req.isSocket) {
-	      return res.badRequest();
-	    }
-
 	    var out 		= {};
 		var knex 		= sails.config.knex;
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			var param 		= req.allParams();
-			var posisi 		= param[0].value;
-
+			var posisi 		= req.param('posisi_name');
 			if (posisi !== '') {
 				var data = {
 					posisi_name: posisi
@@ -54,15 +48,47 @@ module.exports = {
 
 				knex('posisi').insert(data).then(function(id) {
 					out = {
-						status: true
+						status: true,
+						msg: 'Data Posisi berhasil ditambahkan'
 					};
 					sails.sockets.broadcast('global', 'posisi_add', out);
+					res.send(out);
 				});
-				res.send(out);
 			} else {
 				out = {
 					status: false,
 					msg: 'Posisi tidak boleh kosong'
+				};
+
+				res.send(out);
+			}
+		}
+	},
+	detail: function(req, res) {
+		var out = {};
+		var knex 		= sails.config.knex;
+
+		if (req.session.data_login === undefined) {
+			res.redirect('/');
+		} else {
+			var posisi_id = req.param('posisi_id');
+			if (posisi_id !== '') {
+				knex
+				.select('pegawai_name', 'pegawai_telp', 'kota_name', knex.raw('IF(pegawai_gender="L", "Laki-laki", "Perempuan") AS pegawai_gender'))
+				.from('pegawai')
+				.leftJoin('kota', 'pegawai.pegawai_kota_id', 'kota.kota_id')
+				.where('pegawai_posisi_id', posisi_id)
+				.then(function(result) {
+					var data = {
+						"data" : result
+					};
+
+					res.send(data);
+				});
+			} else {
+				out = {
+					status: false,
+					msg: 'ID Posisi tidak boleh kosong'
 				};
 
 				res.send(out);

@@ -23,6 +23,7 @@
   </div>
 </div>
 
+<!-- Modal -->
 <div class="modal fade" id="modal-posisi-add" role="dialog">
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
@@ -44,6 +45,61 @@
 		      </div>
 		    </div>
 		  </form>
+		</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-posisi-update" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
+		  <div class="form-msg"></div>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <h3 style="display:block; text-align:center;">Update Data posisi</h3>
+
+		  <form id="form-posisi-update">
+	        <input type="hidden" name="posisi_id">
+		    <div class="input-group form-group">
+		      <span class="input-group-addon" id="sizing-addon2">
+		        <i class="glyphicon glyphicon-user"></i>
+		      </span>
+		      <input type="text" class="form-control" placeholder="Nama Posisi" name="posisi_name" aria-describedby="sizing-addon2">
+		    </div>
+		    <div class="form-group">
+		      <div class="col-md-12">
+		          <button type="submit" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Update Data</button>
+		      </div>
+		    </div>
+		  </form>
+		</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-posisi-detail" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+		<div class="col-md-12 well">
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <h3 style="display:block; text-align:center;"><i class="fa fa-briefcase"></i> List Pegawai (Posisi: <b id="posisi_name_detail">-</b>)</h3>
+
+		  <div class="box box-body">
+		      <table id="detail-data" class="table table-bordered table-striped">
+		        <thead>
+		          <tr>
+		            <th>Nama</th>
+		            <th>No Telp</th>
+		            <th>Asal kota</th>
+		            <th>Jenis Kelamin</th>
+		          </tr>
+		        </thead>
+		      </table>
+		  </div>
+
+		  <div class="text-right">
+		    <button class="btn btn-danger" data-dismiss="modal"> Close</button>
+		  </div>
 		</div>
     </div>
   </div>
@@ -75,12 +131,36 @@
   $(document).on('submit', '#form-posisi-add', function(e) {
   	e.preventDefault();
 
-    var data = JSON.stringify($(this).serializeArray());
-    data = JSON.parse(data);
-    io.socket.post('/posisi/add', data, function(out) {
-    	if (out) {
-			$('#modal-posisi-add').modal('hide');
+    var data = $(this).serialize();
+    $.post('/posisi/add', data, function(out) {
+		$('#modal-posisi-add').modal('hide');
+    	if (out.status) {
+			$(this).find('input[name="posisi_name"]').val('');
+    		swal('Success', out.msg, 'success');
+    	} else {
+    		swal('Failed', out.msg, 'error');
     	}
     });
+  });
+
+  $(document).on('click', '.btn-posisi-detail', function() {
+  	$('#detail-data').DataTable().destroy();
+  	var posisi_id 		= $(this).data('id');
+  	var posisi_name 	= $(this).parent().parent().find('td:nth-child(2)').text();
+  	$('#posisi_name_detail').text(posisi_name);
+
+	$('#detail-data').DataTable( {
+        ajax: {
+        	url: '/posisi/detail/'+posisi_id,
+        	type: 'GET'
+        },
+        columns: [
+            { data: "pegawai_name" },
+            { data: "pegawai_telp" },
+            { data: "kota_name" },
+            { data: "pegawai_gender" }
+        ]
+    });
+	$('#modal-posisi-detail').modal('show');
   });
 </script>
