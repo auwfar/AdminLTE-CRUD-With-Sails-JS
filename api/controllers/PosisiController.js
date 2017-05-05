@@ -64,6 +64,67 @@ module.exports = {
 			}
 		}
 	},
+	show_edit: function(req, res) {
+		var knex = sails.config.knex;
+
+		if (req.session.data_login === undefined) {
+			res.redirect('/');
+		} else {
+			var posisi_id = req.param('posisi_id');
+			if (posisi_id !== '') {
+				knex.select().table('posisi').where({
+					posisi_id: posisi_id
+				}).then(function(result) {
+					out = {
+						status: true,
+						data: result[0]
+					};
+
+					res.send(out);
+				});
+			} else {
+				out = {
+					status: false,
+					msg: 'ID Posisi tidak boleh kosong'
+				};
+
+				res.send(out);
+			}
+		}
+	},
+	update: function(req, res) {
+	    var out 		= {};
+		var knex 		= sails.config.knex;
+		if (req.session.data_login === undefined) {
+			res.redirect('/');
+		} else {
+			var posisi_id 		= req.param('posisi_id');
+			var posisi 			= req.param('posisi_name');
+			if (posisi !== '') {
+				var data = {
+					posisi_name: posisi
+				};
+
+				knex('posisi').where({
+					posisi_id: posisi_id
+				}).update(data).then(function(id) {
+					out = {
+						status: true,
+						msg: 'Data Posisi berhasil diupdate'
+					};
+					sails.sockets.broadcast('global', 'posisi_update', out);
+					res.send(out);
+				});
+			} else {
+				out = {
+					status: false,
+					msg: 'Posisi tidak boleh kosong'
+				};
+
+				res.send(out);
+			}
+		}
+	},
 	detail: function(req, res) {
 		var out = {};
 		var knex 		= sails.config.knex;

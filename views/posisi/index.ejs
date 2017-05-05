@@ -121,7 +121,12 @@
 
     socket.connect('/public/join');
     io.socket.on('posisi_add', function (out) {
-    	if (out) {
+    	if (out.status) {
+			$('#list-data').DataTable().ajax.reload();
+    	}
+	});
+	io.socket.on('posisi_update', function (out) {
+    	if (out.status) {
 			$('#list-data').DataTable().ajax.reload();
     	}
 	});
@@ -136,6 +141,40 @@
 		$('#modal-posisi-add').modal('hide');
     	if (out.status) {
 			$(this).find('input[name="posisi_name"]').val('');
+    		swal('Success', out.msg, 'success');
+    	} else {
+    		swal('Failed', out.msg, 'error');
+    	}
+    });
+  });
+
+  $(document).on('click', '.btn-posisi-update', function() {
+  	var posisi_id 		= $(this).data('id');
+
+  	$.get('/posisi/show_edit/'+posisi_id, function(out) {
+  		console.log(out);
+  		var form = $('#form-posisi-update');
+
+  		if (out.status) {
+  			form.find('input[name="posisi_id"]').val(out.data.posisi_id);
+  			form.find('input[name="posisi_name"]').val(out.data.posisi_name);
+
+			$('#modal-posisi-update').modal('show');
+  		} else {
+  			swal('Failed', out.msg, 'error');
+  		}
+  	});
+
+	$('#modal-posisi-update').modal('show');
+  });
+
+  $(document).on('submit', '#form-posisi-update', function(e) {
+  	e.preventDefault();
+
+    var data = $(this).serialize();
+    $.post('/posisi/update', data, function(out) {
+		$('#modal-posisi-update').modal('hide');
+    	if (out.status) {
     		swal('Success', out.msg, 'success');
     	} else {
     		swal('Failed', out.msg, 'error');
