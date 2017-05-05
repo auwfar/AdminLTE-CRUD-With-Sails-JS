@@ -23,7 +23,7 @@ module.exports = {
 				var number = 1;
 				result.forEach(function(val, key) {
 					result[key].number 	= number;
-					result[key].act 	= '<button class="btn btn-warning btn-posisi-update" data-id="'+val.posisi_id +'"><i class="glyphicon glyphicon-repeat"></i> Update</button><button class="btn btn-danger btn-posisi-delete" data-id="'+val.posisi_id +'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-remove-sign"></i> Delete</button><button class="btn btn-info btn-posisi-detail" data-id="'+val.posisi_id +'"><i class="glyphicon glyphicon-info-sign"></i> Detail</button>';
+					result[key].act 	= '<div class="btn-group"><button class="btn btn-warning btn-posisi-update" data-id="'+val.posisi_id +'"><i class="glyphicon glyphicon-repeat"></i> Update</button><button class="btn btn-danger btn-posisi-delete" data-id="'+val.posisi_id +'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-remove-sign"></i> Delete</button><button class="btn btn-info btn-posisi-detail" data-id="'+val.posisi_id +'"><i class="glyphicon glyphicon-info-sign"></i> Detail</button></div>';
 					number++;
 				});
 				var data = {
@@ -119,6 +119,34 @@ module.exports = {
 				out = {
 					status: false,
 					msg: 'Posisi tidak boleh kosong'
+				};
+
+				res.send(out);
+			}
+		}
+	},
+	delete: function(req, res) {
+	    var out 		= {};
+		var knex 		= sails.config.knex;
+		if (req.session.data_login === undefined) {
+			res.redirect('/');
+		} else {
+			var posisi_id 		= req.param('posisi_id');
+			if (posisi_id !== '') {
+				knex('posisi').where({
+					posisi_id: posisi_id
+				}).del().then(function(id) {
+					out = {
+						status: true,
+						msg: 'Data Posisi berhasil dihapus'
+					};
+					sails.sockets.broadcast('global', 'posisi_delete', out);
+					res.send(out);
+				});
+			} else {
+				out = {
+					status: false,
+					msg: 'ID Posisi tidak boleh kosong'
 				};
 
 				res.send(out);
