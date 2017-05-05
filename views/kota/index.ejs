@@ -1,13 +1,13 @@
 <div class="box">
   <div class="box-header">
     <div class="col-md-6" style="padding: 0;">
-        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#modal-posisi-add"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
+        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#modal-kota-add"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div>
     <div class="col-md-3">
-        <a href="/posisi/export" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
+        <a href="/kota/export" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
     </div>
     <div class="col-md-3">
-        <button class="form-control btn btn-default" data-toggle="modal" data-target="#modal-posisi-import"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Import Data Excel</button>
+        <button class="form-control btn btn-default" data-toggle="modal" data-target="#modal-kota-import"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Import Data Excel</button>
     </div>
   </div>
   <div class="box-body">
@@ -15,7 +15,7 @@
 	    <thead>
             <tr>
                 <th>No</th>
-                <th>Posisi</th>
+                <th>Kota</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -24,20 +24,20 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modal-posisi-add" role="dialog">
+<div class="modal fade" id="modal-kota-add" role="dialog">
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
 		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
 		  <div class="form-msg"></div>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <h3 style="display:block; text-align:center;">Tambah Data Posisi</h3>
+		  <h3 style="display:block; text-align:center;">Tambah Data Kota</h3>
 
-		  <form id="form-posisi-add">
+		  <form id="form-kota-add">
 		    <div class="input-group form-group">
 		      <span class="input-group-addon" id="sizing-addon2">
 		        <i class="glyphicon glyphicon-user"></i>
 		      </span>
-		      <input type="text" class="form-control" placeholder="Nama Posisi" name="posisi_name" aria-describedby="sizing-addon2">
+		      <input type="text" class="form-control" placeholder="Nama Kota" name="kota_name" aria-describedby="sizing-addon2">
 		    </div>
 		    <div class="form-group">
 		      <div class="col-md-12">
@@ -50,21 +50,21 @@
   </div>
 </div>
 
-<div class="modal fade" id="modal-posisi-update" role="dialog">
+<div class="modal fade" id="modal-kota-update" role="dialog">
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
 		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
 		  <div class="form-msg"></div>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <h3 style="display:block; text-align:center;">Update Data Posisi</h3>
+		  <h3 style="display:block; text-align:center;">Update Data Kota</h3>
 
-		  <form id="form-posisi-update">
-	        <input type="hidden" name="posisi_id">
+		  <form id="form-kota-update">
+	        <input type="hidden" name="kota_id">
 		    <div class="input-group form-group">
 		      <span class="input-group-addon" id="sizing-addon2">
 		        <i class="glyphicon glyphicon-user"></i>
 		      </span>
-		      <input type="text" class="form-control" placeholder="Nama Posisi" name="posisi_name" aria-describedby="sizing-addon2">
+		      <input type="text" class="form-control" placeholder="Nama Kota" name="kota_name" aria-describedby="sizing-addon2">
 		    </div>
 		    <div class="form-group">
 		      <div class="col-md-12">
@@ -77,21 +77,21 @@
   </div>
 </div>
 
-<div class="modal fade" id="modal-posisi-detail" role="dialog">
+<div class="modal fade" id="modal-kota-detail" role="dialog">
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
 		<div class="col-md-12 well">
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <h3 style="display:block; text-align:center;"><i class="fa fa-briefcase"></i> List Pegawai (Posisi: <b id="posisi_name_detail">-</b>)</h3>
+		  <h3 style="display:block; text-align:center;"><i class="fa fa-briefcase"></i> List Pegawai (Kota: <b id="kota_name_detail">-</b>)</h3>
 
 		  <div class="box box-body">
 		      <table id="detail-data" class="table table-bordered table-striped">
 		        <thead>
 		          <tr>
 		            <th>Nama</th>
-		            <th>No Telp</th>
-		            <th>Asal kota</th>
-		            <th>Jenis Kelamin</th>
+                <th>No Telp</th>
+                <th>Jenis Kelamin</th>
+                <th>Posisi</th>
 		          </tr>
 		        </thead>
 		      </table>
@@ -105,15 +105,15 @@
   </div>
 </div>
 
-<div class="modal fade" id="modal-posisi-import" role="dialog">
+<div class="modal fade" id="modal-kota-import" role="dialog">
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
 		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
 		  <div class="form-msg"></div>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <h3 style="display:block; text-align:center;">Import Data Posisi</h3>
+		  <h3 style="display:block; text-align:center;">Import Data Kota</h3>
 
-		  <form method="POST" action="/posisi/import" enctype="multipart/form-data">
+		  <form method="POST" action="/kota/import" enctype="multipart/form-data">
 		    <div class="input-group form-group">
 		      <span class="input-group-addon" id="sizing-addon2">
 		        <i class="glyphicon glyphicon-file"></i>
@@ -135,28 +135,28 @@
   $(document).ready(function() {
     $('#list-data').DataTable( {
         ajax: {
-        	url: '/posisi/get',
+        	url: '/kota/get',
         	type: 'GET'
         },
         columns: [
             { data: "number" },
-            { data: "posisi_name" },
+            { data: "kota_name" },
             { data: "act", className: "text-center" }
         ]
     });
 
     socket.connect('/public/join');
-    io.socket.on('posisi_add', function (out) {
+    io.socket.on('kota_add', function (out) {
     	if (out.status) {
 			$('#list-data').DataTable().ajax.reload();
     	}
 	});
-	io.socket.on('posisi_update', function (out) {
+	io.socket.on('kota_update', function (out) {
     	if (out.status) {
 			$('#list-data').DataTable().ajax.reload();
     	}
 	});
-	io.socket.on('posisi_delete', function (out) {
+	io.socket.on('kota_delete', function (out) {
     	if (out.status) {
 			$('#list-data').DataTable().ajax.reload();
     	}
@@ -164,14 +164,14 @@
   });
 
   
-  $(document).on('submit', '#form-posisi-add', function(e) {
+  $(document).on('submit', '#form-kota-add', function(e) {
   	e.preventDefault();
 
     var data = $(this).serialize();
-    $.post('/posisi/add', data, function(out) {
-		$('#modal-posisi-add').modal('hide');
+    $.post('/kota/add', data, function(out) {
+		$('#modal-kota-add').modal('hide');
     	if (out.status) {
-			$(this).find('input[name="posisi_name"]').val('');
+			$(this).find('input[name="kota_name"]').val('');
     		swal('Success', out.msg, 'success');
     	} else {
     		swal('Failed', out.msg, 'error');
@@ -179,31 +179,31 @@
     });
   });
 
-  $(document).on('click', '.btn-posisi-update', function() {
-  	var posisi_id 		= $(this).data('id');
+  $(document).on('click', '.btn-kota-update', function() {
+  	var kota_id 		= $(this).data('id');
 
-  	$.get('/posisi/show_edit/'+posisi_id, function(out) {
-  		var form = $('#form-posisi-update');
+  	$.get('/kota/show_edit/'+kota_id, function(out) {
+  		var form = $('#form-kota-update');
 
   		if (out.status) {
-  			form.find('input[name="posisi_id"]').val(out.data.posisi_id);
-  			form.find('input[name="posisi_name"]').val(out.data.posisi_name);
+  			form.find('input[name="kota_id"]').val(out.data.kota_id);
+  			form.find('input[name="kota_name"]').val(out.data.kota_name);
 
-			$('#modal-posisi-update').modal('show');
+			$('#modal-kota-update').modal('show');
   		} else {
   			swal('Failed', out.msg, 'error');
   		}
   	});
 
-	$('#modal-posisi-update').modal('show');
+	$('#modal-kota-update').modal('show');
   });
 
-  $(document).on('submit', '#form-posisi-update', function(e) {
+  $(document).on('submit', '#form-kota-update', function(e) {
   	e.preventDefault();
 
     var data = $(this).serialize();
-    $.post('/posisi/update', data, function(out) {
-		$('#modal-posisi-update').modal('hide');
+    $.post('/kota/update', data, function(out) {
+		$('#modal-kota-update').modal('hide');
     	if (out.status) {
     		swal('Success', out.msg, 'success');
     	} else {
@@ -212,8 +212,8 @@
     });
   });
 
-  $(document).on('click', '.btn-posisi-delete', function() {
-  	var posisi_id 		= $(this).data('id');
+  $(document).on('click', '.btn-kota-delete', function() {
+  	var kota_id 		= $(this).data('id');
 
   	swal({
 		title: 'Delete',
@@ -225,7 +225,7 @@
 		confirmButtonClass: 'btn btn-success',
 		cancelButtonClass: 'btn btn-danger'
 	}).then(function () {
-	  	$.post('/posisi/delete', {posisi_id: posisi_id}, function(out) {
+	  	$.post('/kota/delete', {kota_id: kota_id}, function(out) {
 	    	if (out.status) {
 	    		swal('Success', out.msg, 'success');
 	    	} else {
@@ -237,24 +237,24 @@
 	});
   });
 
-  $(document).on('click', '.btn-posisi-detail', function() {
+  $(document).on('click', '.btn-kota-detail', function() {
   	$('#detail-data').DataTable().destroy();
-  	var posisi_id 		= $(this).data('id');
-  	var posisi_name 	= $(this).parent().parent().find('td:nth-child(2)').text();
-  	$('#posisi_name_detail').text(posisi_name);
+  	var kota_id 		= $(this).data('id');
+  	var kota_name 	= $(this).parent().parent().find('td:nth-child(2)').text();
+  	$('#kota_name_detail').text(kota_name);
 
 	$('#detail-data').DataTable( {
         ajax: {
-        	url: '/posisi/detail/'+posisi_id,
+        	url: '/kota/detail/'+kota_id,
         	type: 'GET'
         },
         columns: [
             { data: "pegawai_name" },
             { data: "pegawai_telp" },
-            { data: "kota_name" },
-            { data: "pegawai_gender" }
+            { data: "pegawai_gender" },
+            { data: "posisi_name" },
         ]
     });
-	$('#modal-posisi-detail').modal('show');
+	$('#modal-kota-detail').modal('show');
   });
 </script>

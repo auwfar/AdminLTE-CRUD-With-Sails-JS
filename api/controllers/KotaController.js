@@ -1,7 +1,7 @@
 /**
- * PosisiController
+ * KotaController
  *
- * @description :: Server-side logic for managing homes
+ * @description :: Server-side logic for managing kotas
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
@@ -10,7 +10,7 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			res.view('posisi/index');
+			res.view('kota/index');
 		}
 	},
 	get: function(req, res) {
@@ -19,11 +19,11 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			knex.select().table('posisi').then(function(result) {
+			knex.select().table('kota').then(function(result) {
 				var number = 1;
 				result.forEach(function(val, key) {
 					result[key].number 	= number;
-					result[key].act 	= '<div class="btn-group"><button class="btn btn-warning btn-posisi-update" data-id="'+val.posisi_id +'"><i class="glyphicon glyphicon-repeat"></i> Update</button><button class="btn btn-danger btn-posisi-delete" data-id="'+val.posisi_id +'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-remove-sign"></i> Delete</button><button class="btn btn-info btn-posisi-detail" data-id="'+val.posisi_id +'"><i class="glyphicon glyphicon-info-sign"></i> Detail</button></div>';
+					result[key].act 	= '<div class="btn-group"><button class="btn btn-warning btn-kota-update" data-id="'+val.kota_id +'"><i class="glyphicon glyphicon-repeat"></i> Update</button><button class="btn btn-danger btn-kota-delete" data-id="'+val.kota_id +'" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-remove-sign"></i> Delete</button><button class="btn btn-info btn-kota-detail" data-id="'+val.kota_id +'"><i class="glyphicon glyphicon-info-sign"></i> Detail</button></div>';
 					number++;
 				});
 				var data = {
@@ -40,24 +40,24 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			var posisi 		= req.param('posisi_name');
-			if (posisi !== '') {
+			var kota 		= req.param('kota_name');
+			if (kota !== '') {
 				var data = {
-					posisi_name: posisi
+					kota_name: kota
 				};
 
-				knex('posisi').insert(data).then(function(id) {
+				knex('kota').insert(data).then(function(id) {
 					out = {
 						status: true,
-						msg: 'Data Posisi berhasil ditambahkan'
+						msg: 'Data Kota berhasil ditambahkan'
 					};
-					sails.sockets.broadcast('global', 'posisi_add', out);
+					sails.sockets.broadcast('global', 'kota_add', out);
 					res.send(out);
 				});
 			} else {
 				out = {
 					status: false,
-					msg: 'Posisi tidak boleh kosong'
+					msg: 'Kota tidak boleh kosong'
 				};
 
 				res.send(out);
@@ -70,10 +70,10 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			var posisi_id = req.param('posisi_id');
-			if (posisi_id !== '') {
-				knex.select().table('posisi').where({
-					posisi_id: posisi_id
+			var kota_id = req.param('kota_id');
+			if (kota_id !== '') {
+				knex.select().table('kota').where({
+					kota_id: kota_id
 				}).then(function(result) {
 					out = {
 						status: true,
@@ -85,7 +85,7 @@ module.exports = {
 			} else {
 				out = {
 					status: false,
-					msg: 'ID Posisi tidak boleh kosong'
+					msg: 'ID Kota tidak boleh kosong'
 				};
 
 				res.send(out);
@@ -98,27 +98,27 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			var posisi_id 		= req.param('posisi_id');
-			var posisi 			= req.param('posisi_name');
-			if (posisi !== '') {
+			var kota_id 		= req.param('kota_id');
+			var kota 			= req.param('kota_name');
+			if (kota !== '') {
 				var data = {
-					posisi_name: posisi
+					kota_name: kota
 				};
 
-				knex('posisi').where({
-					posisi_id: posisi_id
+				knex('kota').where({
+					kota_id: kota_id
 				}).update(data).then(function(id) {
 					out = {
 						status: true,
-						msg: 'Data Posisi berhasil diupdate'
+						msg: 'Data Kota berhasil diupdate'
 					};
-					sails.sockets.broadcast('global', 'posisi_update', out);
+					sails.sockets.broadcast('global', 'kota_update', out);
 					res.send(out);
 				});
 			} else {
 				out = {
 					status: false,
-					msg: 'Posisi tidak boleh kosong'
+					msg: 'Kota tidak boleh kosong'
 				};
 
 				res.send(out);
@@ -131,22 +131,22 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			var posisi_id 		= req.param('posisi_id');
-			if (posisi_id !== '') {
-				knex('posisi').where({
-					posisi_id: posisi_id
+			var kota_id 		= req.param('kota_id');
+			if (kota_id !== '') {
+				knex('kota').where({
+					kota_id: kota_id
 				}).del().then(function(id) {
 					out = {
 						status: true,
-						msg: 'Data Posisi berhasil dihapus'
+						msg: 'Data Kota berhasil dihapus'
 					};
-					sails.sockets.broadcast('global', 'posisi_delete', out);
+					sails.sockets.broadcast('global', 'kota_delete', out);
 					res.send(out);
 				});
 			} else {
 				out = {
 					status: false,
-					msg: 'ID Posisi tidak boleh kosong'
+					msg: 'ID Kota tidak boleh kosong'
 				};
 
 				res.send(out);
@@ -160,13 +160,13 @@ module.exports = {
 		if (req.session.data_login === undefined) {
 			res.redirect('/');
 		} else {
-			var posisi_id = req.param('posisi_id');
-			if (posisi_id !== '') {
+			var kota_id = req.param('kota_id');
+			if (kota_id !== '') {
 				knex
-				.select('pegawai_name', 'pegawai_telp', 'kota_name', knex.raw('IF(pegawai_gender="L", "Laki-laki", "Perempuan") AS pegawai_gender'))
+				.select('pegawai_name', 'pegawai_telp', knex.raw('IF(pegawai_gender="L", "Laki-laki", "Perempuan") AS pegawai_gender'), 'posisi_name')
 				.from('pegawai')
-				.leftJoin('kota', 'pegawai.pegawai_kota_id', 'kota.kota_id')
-				.where('pegawai_posisi_id', posisi_id)
+				.leftJoin('posisi', 'pegawai.pegawai_posisi_id', 'posisi.posisi_id')
+				.where('pegawai_kota_id', kota_id)
 				.then(function(result) {
 					var data = {
 						"data" : result
@@ -177,7 +177,7 @@ module.exports = {
 			} else {
 				out = {
 					status: false,
-					msg: 'ID Posisi tidak boleh kosong'
+					msg: 'ID Kota tidak boleh kosong'
 				};
 
 				res.send(out);
@@ -185,3 +185,4 @@ module.exports = {
 		}
 	}
 };
+

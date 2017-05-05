@@ -89,6 +89,38 @@ module.exports.routes = {
     controller: "Posisi",
     action: "detail"
   },
+  '/kota': {
+    locals: {
+      title: 'Kota',
+      page: 'kota'
+    },
+    controller: "Kota",
+    action: "index"
+  },
+  '/kota/get': {
+    controller: "Kota",
+    action: "get"
+  },
+  'POST /kota/add': {
+    controller: "Kota",
+    action: "add"
+  },
+  '/kota/show_edit/:kota_id': {
+    controller: "Kota",
+    action: "show_edit"
+  },
+  'POST /kota/update': {
+    controller: "Kota",
+    action: "update"
+  },
+  'POST /kota/delete': {
+    controller: "Kota",
+    action: "delete"
+  },
+  '/kota/detail/:kota_id': {
+    controller: "Kota",
+    action: "detail"
+  }
 
   /***************************************************************************
   *                                                                          *
