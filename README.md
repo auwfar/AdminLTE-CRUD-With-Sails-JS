@@ -4,7 +4,7 @@ CRUD dengan Template Admin LTE menggunakan Sails JS (Realtime)
 Fitur :
 1. CRUD with Ajax
 2. Datatable
-3. Export dan Import ke Excel
+3. Export ke Excel
 4. Chart
 5. Realtime Data
 
