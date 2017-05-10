@@ -6,9 +6,6 @@
     <div class="col-md-3">
         <a href="/posisi/export" target="_blank" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
     </div>
-    <div class="col-md-3">
-        <button class="form-control btn btn-default" data-toggle="modal" data-target="#modal-posisi-import"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Import Data Excel</button>
-    </div>
   </div>
   <div class="box-body">
     <table id="list-data" class="table table-bordered table-striped" width="100%">
@@ -276,7 +273,6 @@
       } else {
         swal('Failed', out.msg, 'error');
       }
-      console.log("success");
     });
   });
 </script>

@@ -57,6 +57,38 @@ module.exports.routes = {
     controller: "Home",
     action: "index"
   },
+  '/pegawai': {
+    locals: {
+      title: 'Pegawai',
+      page: 'pegawai'
+    },
+    controller: "Pegawai",
+    action: "index"
+  },
+  '/pegawai/get': {
+    controller: "Pegawai",
+    action: "get"
+  },
+  'POST /pegawai/add': {
+    controller: "Pegawai",
+    action: "add"
+  },
+  '/pegawai/show_edit/:pegawai_id': {
+    controller: "Pegawai",
+    action: "show_edit"
+  },
+  'POST /pegawai/update': {
+    controller: "Pegawai",
+    action: "update"
+  },
+  'POST /pegawai/delete': {
+    controller: "Pegawai",
+    action: "delete"
+  },
+  '/pegawai/export': {
+    controller: "Pegawai",
+    action: "export"
+  },
   '/posisi': {
     locals: {
       title: 'Posisi',
@@ -92,10 +124,6 @@ module.exports.routes = {
   '/posisi/export': {
     controller: "Posisi",
     action: "export"
-  },
-  '/posisi/import': {
-    controller: "Posisi",
-    action: "import"
   },
   '/kota': {
     locals: {

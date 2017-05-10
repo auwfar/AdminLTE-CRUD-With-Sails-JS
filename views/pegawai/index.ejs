@@ -1,0 +1,322 @@
+<div class="box">
+  <div class="box-header">
+    <div class="col-md-6" style="padding: 0;">
+        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#modal-pegawai-add"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
+    </div>
+    <div class="col-md-3">
+        <a href="/pegawai/export" target="_blank" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
+    </div>
+  </div>
+  <div class="box-body">
+    <table id="list-data" class="table table-bordered table-striped" width="100%">
+	    <thead>
+            <tr>
+                <th>Nama</th>
+                <th>No Telp</th>
+                <th>Asal kota</th>
+                <th>Jenis Kelamin</th>
+                <th>Posisi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-pegawai-add" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
+		  <div class="form-msg"></div>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <h3 style="display:block; text-align:center;">Tambah Data Pegawai</h3>
+
+		  <form id="form-pegawai-add">
+		    <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-user"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Nama" name="pegawai_name" aria-describedby="sizing-addon2">
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-phone-alt"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Nomor Telepon" name="pegawai_telp" aria-describedby="sizing-addon2">
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-home"></i>
+          </span>
+          <select name="pegawai_kota" class="form-control select2" aria-describedby="sizing-addon2">
+            <%for (var value in kota){%>
+              <option value="<%=kota[value].kota_id%>">
+                <%=kota[value].kota_name%>
+              </option>
+            <%}%>
+          </select>
+        </div>
+        <div class="input-group form-group" style="display: inline-block;">
+          <span class="input-group-addon" id="sizing-addon2">
+          <i class="glyphicon glyphicon-tag"></i>
+          </span>
+          <span class="input-group-addon">
+              <input type="radio" name="pegawai_gender" value="L" id="laki" class="minimal">
+          <label for="laki">Laki-laki</label>
+            </span>
+            <span class="input-group-addon">
+              <input type="radio" name="pegawai_gender" value="P" id="perempuan" class="minimal"> 
+          <label for="perempuan">Perempuan</label>
+            </span>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-briefcase"></i>
+          </span>
+          <select name="pegawai_posisi" class="form-control select2" aria-describedby="sizing-addon2">
+            <%for (var value in posisi){%>
+              <option value="<%=posisi[value].posisi_id%>">
+                <%=posisi[value].posisi_name%>
+              </option>
+            <%}%>
+          </select>
+        </div>
+		    <div class="form-group">
+		      <div class="col-md-12">
+		          <button type="submit" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Tambah Data</button>
+		      </div>
+		    </div>
+		  </form>
+		</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-pegawai-update" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+  		<div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
+  		  <div class="form-msg"></div>
+  		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  		  <h3 style="display:block; text-align:center;">Update Data Pegawai</h3>
+
+  		  <form id="form-pegawai-update">
+  	        <input type="hidden" name="pegawai_id">
+  		    <div class="input-group form-group">
+            <span class="input-group-addon" id="sizing-addon2">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Nama" name="pegawai_name" aria-describedby="sizing-addon2">
+          </div>
+          <div class="input-group form-group">
+            <span class="input-group-addon" id="sizing-addon2">
+              <i class="glyphicon glyphicon-phone-alt"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Nomor Telepon" name="pegawai_telp" aria-describedby="sizing-addon2">
+          </div>
+          <div class="input-group form-group">
+            <span class="input-group-addon" id="sizing-addon2">
+              <i class="glyphicon glyphicon-home"></i>
+            </span>
+            <select name="pegawai_kota" class="form-control select2" aria-describedby="sizing-addon2">
+              <%for (var value in kota){%>
+                <option value="<%=kota[value].kota_id%>">
+                  <%=kota[value].kota_name%>
+                </option>
+              <%}%>
+            </select>
+          </div>
+          <div class="input-group form-group" style="display: inline-block;">
+            <span class="input-group-addon" id="sizing-addon2">
+              <i class="glyphicon glyphicon-tag"></i>
+            </span>
+            <span class="input-group-addon">
+                <input type="radio" name="pegawai_gender" value="L" id="laki" class="minimal">
+            <label for="laki">Laki-laki</label>
+              </span>
+              <span class="input-group-addon">
+                <input type="radio" name="pegawai_gender" value="P" id="perempuan" class="minimal"> 
+            <label for="perempuan">Perempuan</label>
+              </span>
+          </div>
+          <div class="input-group form-group">
+            <span class="input-group-addon" id="sizing-addon2">
+              <i class="glyphicon glyphicon-briefcase"></i>
+            </span>
+            <select name="pegawai_posisi" class="form-control select2" aria-describedby="sizing-addon2">
+              <%for (var value in posisi){%>
+                <option value="<%=posisi[value].posisi_id%>">
+                  <%=posisi[value].posisi_name%>
+                </option>
+              <%}%>
+            </select>
+          </div>
+  		    <div class="form-group">
+  		      <div class="col-md-12">
+  		          <button type="submit" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Update Data</button>
+  		      </div>
+  		    </div>
+  		  </form>
+  		</div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#list-data').DataTable( {
+        ajax: {
+        	url: '/pegawai/get',
+        	type: 'GET'
+        },
+        columns: [
+            { data: "pegawai_name" },
+            { data: "pegawai_telp" },
+            { data: "kota_name" },
+            { data: "pegawai_gender" },
+            { data: "posisi_name" },
+            { data: "act", className: "text-center" }
+        ]
+    });
+
+    socket.connect('/public/join');
+    io.socket.on('pegawai_add', function (out) {
+    	if (out.status) {
+			 $('#list-data').DataTable().ajax.reload();
+    	}
+  	});
+  	io.socket.on('pegawai_update', function (out) {
+    	if (out.status) {
+			 $('#list-data').DataTable().ajax.reload();
+    	}
+  	});
+  	io.socket.on('pegawai_delete', function (out) {
+    	if (out.status) {
+			 $('#list-data').DataTable().ajax.reload();
+    	}
+  	});
+  });
+
+  
+  $(document).on('submit', '#form-pegawai-add', function(e) {
+  	e.preventDefault();
+
+    var data = $(this).serialize();
+    $.post('/pegawai/add', data, function(out) {
+		  $('#modal-pegawai-add').modal('hide');
+    	if (out.status) {
+  			$(this).find('input[name="pegawai_name"]').val('');
+    		swal('Success', out.msg, 'success');
+    	} else {
+    		swal('Failed', out.msg, 'error');
+    	}
+    });
+  });
+
+  $(document).on('click', '.btn-pegawai-update', function() {
+  	var pegawai_id 		= $(this).data('id');
+
+  	$.get('/pegawai/show_edit/'+pegawai_id, function(out) {
+  		var form = $('#form-pegawai-update');
+
+  		if (out.status) {
+  			form.find('input[name="pegawai_id"]').val(out.data.pegawai_id);
+        form.find('input[name="pegawai_name"]').val(out.data.pegawai_name);
+        form.find('input[name="pegawai_telp"]').val(out.data.pegawai_telp);
+        form.find('select[name="pegawai_kota"]').find('option[value="'+out.data.pegawai_kota_id+'"]').prop('selected', true);
+        form.find('input[name="pegawai_gender"][value="'+out.data.pegawai_gender+'"]').prop('checked', true);
+        form.find('select[name="pegawai_posisi"]').find('option[value="'+out.data.pegawai_posisi_id+'"]').prop('selected', true);
+
+  			$('#modal-pegawai-update').modal('show');
+  		} else {
+  			swal('Failed', out.msg, 'error');
+  		}
+  	});
+
+    $('#modal-pegawai-update').modal('show');
+  });
+
+  $(document).on('submit', '#form-pegawai-update', function(e) {
+  	e.preventDefault();
+
+    var data = $(this).serialize();
+    console.log(data);
+    $.post('/pegawai/update', data, function(out) {
+		  $('#modal-pegawai-update').modal('hide');
+    	if (out.status) {
+    		swal('Success', out.msg, 'success');
+    	} else {
+    		swal('Failed', out.msg, 'error');
+    	}
+    });
+  });
+
+  $(document).on('click', '.btn-pegawai-delete', function() {
+  	var pegawai_id 		= $(this).data('id');
+
+  	swal({
+  		title: 'Delete',
+  		text: "Hapus Data Ini?",
+  		type: 'warning',
+  		showCancelButton: true,
+  		confirmButtonText: 'Ya, Hapus Data Ini',
+  		cancelButtonText: 'Batal',
+  		confirmButtonClass: 'btn btn-success',
+  		cancelButtonClass: 'btn btn-danger'
+  	}).then(function () {
+  	  	$.post('/pegawai/delete', {pegawai_id: pegawai_id}, function(out) {
+  	    	if (out.status) {
+  	    		swal('Success', out.msg, 'success');
+  	    	} else {
+  	    		swal('Failed', out.msg, 'error');
+  	    	}
+  	    });
+  	}, function (dismiss) {
+  		if (dismiss === 'cancel') {}
+  	});
+  });
+
+  $(document).on('click', '.btn-pegawai-detail', function() {
+  	$('#detail-data').DataTable().destroy();
+  	var pegawai_id 		= $(this).data('id');
+  	var pegawai_name 	= $(this).parent().parent().find('td:nth-child(2)').text();
+  	$('#pegawai_name_detail').text(pegawai_name);
+
+  	$('#detail-data').DataTable( {
+      ajax: {
+      	url: '/pegawai/detail/'+pegawai_id,
+      	type: 'GET'
+      },
+      columns: [
+          { data: "pegawai_name" },
+          { data: "pegawai_telp" },
+          { data: "kota_name" },
+          { data: "pegawai_gender" }
+      ]
+    });
+  	$('#modal-pegawai-detail').modal('show');
+  });
+
+  $(document).on('submit', '#form-pegawai-import', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: '/pegawai/import',
+      type: 'POST',
+      dataType: 'json',
+      data: new FormData( this ),
+      processData: false,
+      contentType: false
+    })
+    .done(function(out) {
+      $('#modal-pegawai-import').modal('hide');
+      if (out.status) {
+        swal('Success', out.msg, 'success');
+      } else {
+        swal('Failed', out.msg, 'error');
+      }
+      console.log("success");
+    });
+  });
+</script>
