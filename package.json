@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "ejs": "2.3.4",
+    "exceljs": "^0.4.6",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-coffee": "1.0.0",
@@ -22,6 +23,7 @@
     "knex": "^0.12.9",
     "md5": "^2.2.1",
     "mysql": "^2.13.0",
+    "node_spreadsheet": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.13",
     "sails-disk": "~0.10.9",

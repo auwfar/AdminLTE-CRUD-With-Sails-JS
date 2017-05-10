@@ -89,6 +89,14 @@ module.exports.routes = {
     controller: "Posisi",
     action: "detail"
   },
+  '/posisi/export': {
+    controller: "Posisi",
+    action: "export"
+  },
+  '/posisi/import': {
+    controller: "Posisi",
+    action: "import"
+  },
   '/kota': {
     locals: {
       title: 'Kota',
@@ -120,7 +128,11 @@ module.exports.routes = {
   '/kota/detail/:kota_id': {
     controller: "Kota",
     action: "detail"
-  }
+  },
+  '/kota/export': {
+    controller: "Kota",
+    action: "export"
+  },
 
   /***************************************************************************
   *                                                                          *

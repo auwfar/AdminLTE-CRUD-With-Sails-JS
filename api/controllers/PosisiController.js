@@ -5,6 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var Excel 	= require('exceljs');
 module.exports = {
 	index: function(req, res) {
 		if (req.session.data_login === undefined) {
@@ -182,6 +183,68 @@ module.exports = {
 
 				res.send(out);
 			}
+		}
+	},
+	export: function(req, res) {
+		var knex = sails.config.knex;
+
+		if (req.session.data_login === undefined) {
+			res.redirect('/');
+		} else {
+			var workbook 	= new Excel.Workbook();
+			var sheet 		= workbook.addWorksheet('Data Posisi');
+			var worksheet 	= workbook.getWorksheet('Data Posisi');
+
+			worksheet.addRow(['ID Posisi', 'Nama Posisi']);
+			worksheet.getCell('A1').border = {
+			    top: {style:'thin'},
+			    left: {style:'thin'},
+			    bottom: {style:'thin'},
+			    right: {style:'thin'}
+			};
+			worksheet.getCell('B1').border = {
+			    top: {style:'thin'},
+			    left: {style:'thin'},
+			    bottom: {style:'thin'},
+			    right: {style:'thin'}
+			};
+
+			knex.select().table('posisi').then(function(result) {
+				var cell = 2;
+				result.forEach(function(val, key) {
+					worksheet.addRow([val.posisi_id, val.posisi_name]);
+
+					worksheet.getCell('A'+cell).border = {
+					    top: {style:'thin'},
+					    left: {style:'thin'},
+					    bottom: {style:'thin'},
+					    right: {style:'thin'}
+					};
+					worksheet.getCell('B'+cell).border = {
+					    top: {style:'thin'},
+					    left: {style:'thin'},
+					    bottom: {style:'thin'},
+					    right: {style:'thin'}
+					};
+					cell++;
+				});
+
+				// Style
+				worksheet.getRow(1).font = {size: 12, bold: true };
+				worksheet.getColumn(1).width = 8;
+				worksheet.getColumn(2).width = 18;
+
+				workbook.xlsx.writeFile('./assets/excel/Data Posisi.xlsx')
+			    .then(function() {
+					res.download('./assets/excel/Data Posisi.xlsx', function (err) {
+			            if (err) {
+			              return res.serverError(err);
+			            } else {
+			              return res.ok();
+			            }
+			        });
+			    });
+			});
 		}
 	}
 };
